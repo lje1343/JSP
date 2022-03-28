@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 페이지</title>
+<style>
+body{
+border : solid black 1px;
+margin : 30px;
+padding: 30px;
+font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+이름 : <input type="text" name="id" placeholder="홍길동" > <br><br>
+생년월일 : <input type="date" name="y" value="2022" min="1990" max="2022"><br><br>
+나이 : <input type="number" name="age" value="20" min="1" max="120"><br><br>
+성별 :
+<input type="radio" name="gender2" value="남" checked>남자 
+<input type="radio" name="gender2" value="여">여자 <br><br>
+전화번호 :<select name = "hp">
+		<option value="010">010</option>
+		<option value="016">016</option>
+		<option value="017">017</option>
+		<option value="018">018</option>
+		<option value="019">019</option>
+		</select>
+		<input type="text" name="ph" style="width:60px">
+		<input type="text" name="ph" style="width:60px"> <br><br>
+주소 : <input type="text" name="id"> <br><br>
+자기소개 <br>
+<textarea name="comment" rows="10" cols="50" placeholder="자기소개를 적어주세요."></textarea>
+<br>
+<button>완료</button>
+
+</body>
+</html>
