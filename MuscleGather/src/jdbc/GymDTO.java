@@ -91,16 +91,16 @@ public class GymDTO extends UserDTO{
 	public void setGym_secret(String gym_secret) {
 		this.gym_secret = gym_secret;
 	}
-	public String getTrainer_regdate() {
+	public String getGym_regdate() {
 		return gym_regdate;
 	}
-	public void setTrainer_regdate(String gym_regdate) {
+	public void setGym_regdate(String gym_regdate) {
 		this.gym_regdate = gym_regdate;
 	}
-	public String getTrainer_images() {
+	public String getGym_images() {
 		return gym_images;
 	}
-	public void setTrainer_images(String gym_images) {
+	public void setGym_images(String gym_images) {
 		this.gym_images = gym_images;
 	}
 	

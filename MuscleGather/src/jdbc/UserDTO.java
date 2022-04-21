@@ -98,7 +98,7 @@ public class UserDTO {
 	public String getUser_addrdetail() {
 		return user_addrdetail;
 	}
-	public void setUser_addrderail(String user_addrdetail) {
+	public void setUser_addrdetail(String user_addrdetail) {
 		this.user_addrdetail = user_addrdetail;
 	}
 	public String getUser_gender() {

@@ -46,7 +46,7 @@
 
          <div class="col-md-4">
         	 <p>번호 : <%=product.getGym_no()%></p>
-        	 <p><a href="gymdetail.jsp?user_no=<%=product.getUser_no() %>"><%=product.getGym_name() %></a>
+        	 <p><a href="gymdetail.jsp?gym_no=<%=product.getUser_no() %>"><%=product.getGym_name() %></a>
         	 <p>이름 : <%=product.getGym_name()%></p>
         	 <p>소개 : <%=product.getGym_content()%></p>
         	 <p>주소 : <%=product.getGym_addr()%></p>

@@ -31,9 +31,9 @@
 	
 	<%
 
-		int user_no = Integer.parseInt(request.getParameter("user_no"));
+		int gym_no = Integer.parseInt(request.getParameter("gym_no"));
 	
-		GymDTO product = (new GymDAO()).getDetail(user_no);	
+		GymDTO product = (new GymDAO()).getGym(gym_no);	
 		System.out.println();
 		
 		String addr = product.getGym_addr();
@@ -53,6 +53,7 @@
       	 <p>등록날짜 : <%=product.getGym_regdate()%></p>
       	 <p>급여 : <%=product.getGym_salary()%></p>
 		<a href="gymlist.jsp" class="btn btn-secondary">구인목록</a>
+		
 		
 		
 		
