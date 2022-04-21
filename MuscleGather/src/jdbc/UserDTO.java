@@ -95,7 +95,7 @@ public class UserDTO {
 	public void setUser_addr(String user_addr) {
 		this.user_addr = user_addr;
 	}
-	public String getUser_addrderail() {
+	public String getUser_addrdetail() {
 		return user_addrdetail;
 	}
 	public void setUser_addrderail(String user_addrdetail) {

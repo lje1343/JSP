@@ -31,9 +31,9 @@
 	
 	<%
 
-		String gym_no = request.getParameter("gym_no");
+		int user_no = Integer.parseInt(request.getParameter("user_no"));
 	
-		GymDTO product = (new GymDAO()).getDetail(gym_no);	
+		GymDTO product = (new GymDAO()).getDetail(user_no);	
 		System.out.println();
 		
 		String addr = product.getGym_addr();
