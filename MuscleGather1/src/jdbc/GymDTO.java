@@ -15,14 +15,14 @@ public class GymDTO extends UserDTO{
 	}
 	// DB - DAO
 	public GymDTO(String user_no, String user_name, String user_pw, String user_birth, String user_zipcode,
-			String user_addr, String user_addrdetail, String user_gender, String user_email, String user_phone,
+			String user_addr, String user_addrderail, String user_gender, String user_email, String user_phone,
 			String user_admin, String user_kakao, String user_auth, String user_status,
 			
 			String gym_no, String gym_name, String gym_content, String gym_addr, String gym_salary,
 			String gym_secret, String gym_regdate, String gym_images) {
 		
 		super(user_no, user_name, user_pw, user_birth, user_zipcode,
-				user_addr, user_addrdetail, user_gender, user_email, user_phone,
+				user_addr, user_addrderail, user_gender, user_email, user_phone,
 				user_admin, user_kakao, user_auth, user_status);
 		
 		this.gym_no = gym_no;
@@ -37,14 +37,14 @@ public class GymDTO extends UserDTO{
 	
 	// DAO - DB
 	public GymDTO(String user_name, String user_pw, String user_birth, String user_zipcode,
-			String user_addr, String user_addrdetail, String user_gender, String user_email, String user_phone,
+			String user_addr, String user_addrderail, String user_gender, String user_email, String user_phone,
 			String user_admin, String user_kakao, String user_auth, String user_status,
 			
 			String gym_name, String gym_content, String gym_addr, String gym_salary,
 			String gym_secret, String gym_images) {
 		
 		super(user_name, user_pw, user_birth, user_zipcode,
-				user_addr, user_addrdetail, user_gender, user_email, user_phone,
+				user_addr, user_addrderail, user_gender, user_email, user_phone,
 				user_admin, user_kakao, user_auth, user_status);
 		
 		this.gym_name = gym_name;

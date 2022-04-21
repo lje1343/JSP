@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
@@ -18,8 +17,6 @@ public class GymDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	
-	// gymdetail.jsp
 	public GymDTO getGym(int user_no) {
 		String sql = "SELECT * FROM gym WHERE user_no = ?";
 		GymDTO gym = null;
@@ -79,7 +76,6 @@ public class GymDAO {
 		return gym;
 	}
 	
-	// gymlist.jsp
 	public ArrayList<GymDTO> getList(){
 		String sql = "SELECT user_no FROM gym";
 		ArrayList<GymDTO> gyms = new ArrayList<GymDTO>();
@@ -113,39 +109,6 @@ public class GymDAO {
 		}
 		
 		return gyms;
-	}
-	
-	
-	/* String gym_no, String user_no, String gym_secret, String gym_regdate, */
-	
-	// gymwrite.jsp
-	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary, String gym_images)
-	throws NamingException, SQLException {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "INSERT INTO gym VALUES (?,?,?,?,?,?,?,?)";
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, 0);
-				pstmt.setInt(2, 0);
-				pstmt.setString(3, gym_name);
-				pstmt.setString(4, gym_content);
-				pstmt.setString(4, gym_addr);
-				pstmt.setString(5, gym_salary);
-				pstmt.setInt(6, 0);
-				pstmt.setString(7, LocalDate.now().toString());
-				pstmt.setString(8, gym_images);
-			int result = pstmt.executeUpdate();
-			
-			return (result==1) ? true : false;			
-			
-		} finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		}
 	}
 }
 

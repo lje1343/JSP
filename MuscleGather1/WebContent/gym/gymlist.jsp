@@ -37,7 +37,6 @@
          ArrayList<GymDTO> products = (new GymDAO()).getList();
          
          for (GymDTO product : products) {
-        	 System.out.println(product.getGym_name());
       %>
       
 <%--          <div class="col-md-4">

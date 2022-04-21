@@ -36,16 +36,6 @@
 	}
 	</script>
 	
-	
-<style>
-form label em {
-	font-size : 15px;
-	color: red;
-	font-weight: 800;
-	}
-	
-</style>
-	
 </head>
 <body>
 	<%!// 선언문
@@ -72,31 +62,29 @@ form label em {
 			
 
 			<div class="form-group row">
-				<label class="col-sm-2">업체명<em> * </em></label>
+				<label class="col-sm-2">*업체명</label>
 				<div class="col-sm-3">
 					<input type="text" name="gym_name" class="form-control">
 				</div>
 
-			<div class="form-group row">
-				<label class="col-sm-2">업체 소개<em> * </em></label>
-				<div class="col-sm-3">
-					<textarea name="gym_content" cols="50" rows="8" class="form-control">
-					</textarea>
-				</div>
-				
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2">지급 연봉</label>
+				<label class="col-sm-2">업체연봉</label>
 				<div class="col-sm-3">
 					<input type="text" name="gym_salary" class="form-control">
 				</div>
 
 			</div>
-
+			<div class="form-group row">
+				<label class="col-sm-2">*업체내용</label>
+				<div class="col-sm-3">
+					<textarea name="gym_content" cols="50" rows="8" class="form-control">
+					</textarea>
+				</div>
 
 			</div>
 
-<!-- 			<div class="form-group row">
+			<div class="form-group row">
 				<label class="col-sm-2">공개여부</label>
 				<div class="col-sm-3">
 					<select name="gym_secret" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -106,22 +94,21 @@ form label em {
 					</select>
 				</div>
 
-			</div> -->
+			</div>
 
 			
 			<div class="form-group row">
 			  <label class="col-sm-2" for="formFileSm">업체사진</label>
 			  <div class="col-sm-3">
-			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file">
+			  <input name = "gym_images" class="form-control form-control-sm" id="formFileSm" type="file">
 			</div>
 			</div>
 			</div>		
-			
-			
-<!-- 주소api  -->
+	
+<!--  주소api 
 <div class="form-group row">
 <div class="col-sm-3">
-<input type="text" id="sample5_address" name="gym_addr" placeholder="*업체주소">
+<input type="text" id="sample5_address" placeholder="*업체주소">
 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br>
 </div></div>
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
@@ -181,7 +168,7 @@ form label em {
     
 </script>
 
-
+ -->
 
 			<div class="form-group row" align="center">
 			<div class="col-sm-10">
