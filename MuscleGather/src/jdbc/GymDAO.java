@@ -126,13 +126,12 @@ public class GymDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "INSERT INTO gym VALUES (?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,?)";
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, 0);
-				pstmt.setInt(2, 0);
-				pstmt.setString(3, gym_name);
-				pstmt.setString(4, gym_content);
+				pstmt.setInt(1, 1);
+				pstmt.setString(2, gym_name);
+				pstmt.setString(3, gym_content);
 				pstmt.setString(4, gym_addr);
 				pstmt.setString(5, gym_salary);
 				pstmt.setInt(6, 0);

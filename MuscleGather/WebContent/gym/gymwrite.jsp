@@ -114,8 +114,7 @@ form label em {
 			  <div class="col-sm-3">
 			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file">
 			</div>
-			</div>
-			</div>		
+			</div>	
 			
 			
 <!-- 주소api  -->
