@@ -1,6 +1,6 @@
 <%@ page import="util.FileUtil" %>
-<%@ page import="dto.*" %>
-<%@page import="dto.FeedDAO"%>
+<%@ page import="jdbc.*" %>
+<%@page import="jdbc.FeedDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     

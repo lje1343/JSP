@@ -73,9 +73,14 @@ public class GymDTO extends UserDTO{
 	}
 	
 	// gymdetail.jsp
-	public GymDTO(Integer no, String user_no, String gym_name, String gym_content, String gym_addr,
-			Integer gym_salary, Integer gym_secret, String gym_regdate) {
-		// TODO Auto-generated constructor stub
+	public GymDTO(Integer no, String gym_name, String gym_content, String gym_addr,
+			Integer gym_salary, String gym_regdate) {
+		this.gym_no = no;
+		this.gym_name = gym_name;
+		this.gym_content = gym_content;
+		this.gym_addr = gym_addr;
+		this.gym_salary = gym_salary;
+		this.gym_regdate = gym_regdate;
 	}
 
 

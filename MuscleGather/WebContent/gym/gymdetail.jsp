@@ -1,4 +1,4 @@
-<%@page import="dto.*"%>
+<%@page import="jdbc.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,7 +31,7 @@
 	
 	<%
 
-		int gym_no = Integer.parseInt(request.getParameter("gym_no"));
+		String gym_no = request.getParameter("gym_no");
 	
 		GymDTO product = (new GymDAO()).getDetail(gym_no);	
 		System.out.println();
@@ -46,7 +46,7 @@
 		
 	</div>
 	<div class = "col-ma-6">
-      	 <p>번호 : <%=product.getGym_no()+1%></p>
+      	 <p>번호 : <%=product.getGym_no()%></p>
       	 <p>업체명 : <%=product.getGym_name() %></p>
       	 <p>소개 : <%=product.getGym_content()%></p>
       	 <p>주소 : <%=product.getGym_addr()%></p>

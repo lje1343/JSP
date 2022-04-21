@@ -19,8 +19,6 @@ public class FeedDTO {
 	public String getTs() {
 		return ts;
 	}
-	
-	
 	public FeedDTO(String id, String content, String ts, String images) {
 		super();
 		this.id = id;
@@ -29,6 +27,7 @@ public class FeedDTO {
 		this.images = images;
 	}
 	
+
+	
 	
 }
-

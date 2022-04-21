@@ -48,7 +48,7 @@ public class GymDAO {
 
 		
 
-	
+	// gymdetail.jsp
 	public GymDTO getDetail(int gym_no) 
 			   throws NamingException, SQLException{
 			      
@@ -68,15 +68,15 @@ public class GymDAO {
 
 			        
 			         Integer no = rs.getInt(1);
-			         String user_no = rs.getString(2);
 			         String gym_name = rs.getString(3);
 			         String gym_content = rs.getString(4);
 			         String gym_addr = rs.getString(5);
 			         Integer gym_salary = rs.getInt(6);
-			         Integer gym_secret = rs.getInt(7);
 			         String gym_regdate = rs.getString(8);
 			         
-			         GymDTO boards = new GymDTO(no,user_no,gym_name,gym_content,gym_addr,gym_salary, gym_secret, gym_regdate);
+			         GymDTO boards = new GymDTO(no,gym_name,gym_content,gym_addr,gym_salary, gym_regdate);
+			         
+
 
 			         return boards;
 			         
@@ -86,6 +86,37 @@ public class GymDAO {
 			         if(conn != null) conn.close();
 			      }
 			      
+
+		}
+	
+	
+	// gymwrite.jsp
+	public boolean insert(String gym_no, String gym_name, String gym_content, String gym_addr, int gym_salary, String gym_regdate)
+	throws NamingException, SQLException {
+		  
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  
+		  try {
+			  String sql = "INSERT INTO gym VALUES(?,?,?,?,?,?)";
+			  conn = ConnectionPool.get();
+			  pstmt = conn.prepareStatement(sql);
+			     pstmt.setInt(1, 0);
+			     pstmt.setString(2, gym_name);
+			     pstmt.setString(3, gym_content);
+			     pstmt.setString(4, gym_addr);
+			     pstmt.setInt(5, gym_salary);
+			     pstmt.setString(6, gym_regdate);
+			  int result = pstmt.executeUpdate();		  
+			  
+			  
+			  return (result==1) ? true : false;
+		  } finally {
+		         if(pstmt != null) pstmt.close();
+		         if(conn != null) conn.close();
+		      }
+		  
+
 
 		}
 	

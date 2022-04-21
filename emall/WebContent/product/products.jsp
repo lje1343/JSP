@@ -1,9 +1,9 @@
-<%@page import="dto.*"%>
+<%@page import="jdbc.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<jsp:useBean id="productDAO" class= "dto.ProductDAO" scope="session" />    
+<jsp:useBean id="productDAO" class= "jdbc.ProductDAO" scope="session" />    
 <!DOCTYPE html>
 <html>
 <head>

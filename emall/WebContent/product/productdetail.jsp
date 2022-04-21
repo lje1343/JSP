@@ -48,7 +48,8 @@
 		<p><%=product.getPdesc() %>
 		<p><b>상품코드 : <%=product.getPid() %></b>
 		<p><b>상품가격 : <%=product.getPprice() %></b><br>
-		<a href="" class="btn btn-info">상품주문</a>
+		<a href="orderconfirm.jsp?pid=<%=product.getPid() %>&pprice=<%=product.getPprice() %>&pname=<%=product.getPname()%>" class="btn btn-secondary" role="button">상세정보</a>
+
 		<a href="productlist.jsp" class="btn btn-secondary">상품목록</a>
 		
 		

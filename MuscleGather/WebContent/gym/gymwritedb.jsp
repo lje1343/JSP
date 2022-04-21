@@ -10,14 +10,12 @@
 <%
 request.setCharacterEncoding("utf-8");
 // images 로 전체 데이터가 넘어옴
-String pid = null;
-String pname = null;
-String pprice = null;
-String pdesc = null;
-String pmanu = null;
-String pcate = null;
-String pcondi = null;
-String pimage = null;
+String gym_name = null;
+String gym_content = null;
+/* String gym_addr = null; */
+String gym_salary = null;
+String gym_secret = null;
+String gym_images = null;
 byte[] pfile = null;
 
 ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
@@ -34,28 +32,27 @@ while(iter.hasNext()) {  // 요소가 있으면 계속 반복 없으면 종료
     
     if(item.isFormField()) { // 이름과 값으로 즉 맵 형태 쌍으로 구성이 되어 있는지 확인
         String value = item.getString("utf-8");	// 한글 처리 중요
-        if (name.equals("pid")) pid = value;
-        else if (name.equals("pname")) pname = value;
-        else if (name.equals("pprice")) pprice = value;
-        else if (name.equals("pdesc")) pdesc = value;
-        else if (name.equals("pmanu")) pmanu = value;
-        else if (name.equals("pcate")) pcate = value;
-        else if (name.equals("pcondi")) pcondi = value;
+        if (name.equals("gym_name")) gym_name = value;
+        else if (name.equals("gym_content")) gym_content = value;
+  /*       else if (name.equals("gym_addr")) gym_addr = value; */
+        else if (name.equals("gym_salary")) gym_salary = value;
+        else if (name.equals("gym_secret")) gym_secret = value;
+        else if (name.equals("gym_images")) gym_images = value;
     }
     else {
         if (name.equals("images")) {
-            pimage = item.getName();
+        	gym_images = item.getName();
             pfile = item.get();
             //서버에 사진 저장
             String root = application.getRealPath(java.io.File.separator);
-            FileUtil.saveImage(root, pimage, pfile);
+            FileUtil.saveImage(root, gym_images, pfile);
             
 	}
 }
 }
 //디비에 게시물 모든 정보 전달
-ProductDAO dao = new ProductDAO();
-if (dao.insert(pid, pname, pprice, pdesc, pmanu, pcate, pcondi, pimage)) {
-	response.sendRedirect("productlist.jsp");
+GymDAO dao = new GymDAO();
+if (dao.insert(gym_name, gym_content, gym_salary, gym_secret, gym_images)) {
+	response.sendRedirect("gymwrite.jsp");
 }
 %>

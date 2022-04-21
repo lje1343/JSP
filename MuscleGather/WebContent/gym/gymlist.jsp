@@ -1,4 +1,4 @@
-<%@page import="dto.*"%>
+<%@page import="jdbc.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
@@ -50,9 +50,7 @@
         	 <p>이름 : <%=product.getGym_name()%></p>
         	 <p>소개 : <%=product.getGym_content()%></p>
         	 <p>주소 : <%=product.getGym_addr()%></p>
-        	 <p>등록날짜 : <%=product.getGym_regdate()%></p>
         	 <p>급여 : <%=product.getGym_salary()%></p>
-        	 <p>---</p>
   	</div>
 
       <% } %>
