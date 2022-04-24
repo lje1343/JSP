@@ -1,3 +1,5 @@
+<%@page import="mail.*"%>
+<%@page import="javax.servlet.http.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -94,6 +96,12 @@ form label em {
    		
     </script>
     
+<%--     <%
+    
+    	MailServlet ms = new MailServlet();
+    HttpServletRequest req = new HttpServletRequest();
+    
+    %> --%>
     
 	<%!// 선언문
 	String title = "회원 가입";%>
@@ -122,7 +130,7 @@ form label em {
 					<input type="email" name="user_email" id="inputEmailForm" class="form-control">
 				</div>
 				<div class="col-sm-2">
-					<button onclick="emailAuthentication()" id="emailAuthbtn" type="button" class="btnChk">인증 메일 전송</button>
+					<button onclick="" id="emailAuthbtn" type="button" class="btnChk">인증 메일 전송</button>
 				</div>
 
 
