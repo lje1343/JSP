@@ -43,26 +43,19 @@
       <div class="row" align="center">
       
       <%
-         ArrayList<GymDTO> products = (new GymDAO()).getList();
+         ArrayList<GymDTO> gyms = (new GymDAO()).getList();
          
-         for (GymDTO product : products) {
-        	 System.out.println(product.getGym_name());
+         for (GymDTO gym : gyms) {
       %>
       
-<%--          <div class="col-md-4">
-            <img src="/images/<%=product.getPimage()%>" style="width: 100%">
-               <h3><%=product.getPname() %></h3>
-               <p><%=product.getPprice() %>원
-               <p><a href="productdetail.jsp?pid=<%=product.getPid() %>" class="btn btn-secondary" role="button">상세정보</a>
-         </div> --%>
 
          <div class="col-md-4">
-        	 <p>번호 : <%=product.getGym_no()%></p>
-        	 <p><a href="gymdetail.jsp?gym_no=<%=product.getUser_no() %>"><%=product.getGym_name() %></a>
-        	 <p>이름 : <%=product.getGym_name()%></p>
-        	 <p>소개 : <%=product.getGym_content()%></p>
-        	 <p>주소 : <%=product.getGym_addr()%></p>
-        	 <p>급여 : <%=product.getGym_salary()%></p>
+        	 <p>번호 : <%=gym.getGym_no()%></p>
+        	 <p><a href="gymdetail.jsp?user_no=<%=gym.getUser_no() %>"><%=gym.getGym_name() %></a>
+        	 <p>이름 : <%=gym.getGym_name()%></p>
+        	 <p>소개 : <%=gym.getGym_content()%></p>
+        	 <p>주소 : <%=gym.getGym_addr()%></p>
+        	 <p>급여 : <%=gym.getGym_salary()%></p>
         	 
   	</div>
 

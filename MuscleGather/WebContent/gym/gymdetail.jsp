@@ -50,9 +50,9 @@
 	
 	<%
 
-		String gym_no = request.getParameter("gym_no");
+		String user_no = request.getParameter("user_no");
 	
-		GymDTO gym = (new GymDAO()).getGym(gym_no);	
+		GymDTO gym = (new GymDAO()).getGym(user_no);	
 		TrainerDTO trainer = (new TrainerDAO()).getTrainer("9");	
 		System.out.println();
 		
