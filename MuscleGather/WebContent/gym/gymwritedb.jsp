@@ -15,15 +15,12 @@ String gym_content = null;
 String gym_salary = null;
 String gym_addr = null; 
 String gym_images = null;
+int chk = 1;	// 사진없는경우
 
 byte[] pfile = null;
 
-System.out.println("while 전---------------");
-System.out.println(gym_name);
-System.out.println(gym_content);
-System.out.println(gym_addr);
-System.out.println(gym_salary);
-System.out.println(gym_images);
+ArrayList<String> arr = new ArrayList<>();
+//이미지를 여러개 추가하면 이름을 여러개 저장하기 위해 ArrayList사용
 
 ServletFileUpload sfu = new ServletFileUpload(new DiskFileItemFactory());
 // 추출 값들을 객체 형태로 저장할 준비
@@ -33,12 +30,12 @@ Iterator iter = items.iterator();
 // 순차적으로 접근하기 위해 객체 생성
 
 while(iter.hasNext()) {  // 요소가 있으면 계속 반복 없으면 종료
-	System.out.println("중간---------------");
+/* 	System.out.println("중간---------------");
 	System.out.println(gym_name);
 	System.out.println(gym_content);
 	System.out.println(gym_addr);
 	System.out.println(gym_salary);
-	System.out.println(gym_images);
+	System.out.println(gym_images); */
     FileItem item = (FileItem) iter.next();  //요소를 하나씩 추출
     String name = item.getFieldName();       //요소의 이름 추출
     
@@ -50,28 +47,51 @@ while(iter.hasNext()) {  // 요소가 있으면 계속 반복 없으면 종료
         else if (name.equals("gym_addr")) gym_addr = value;
     }
     else {
-        if (name.equals("images")) {
-        	gym_images = item.getName();
-            pfile = item.get();
-            //서버에 사진 저장
-            String root = application.getRealPath(java.io.File.separator);
-            System.out.println("루트 ------------------\n " + root);
-            FileUtil.saveImage(root, gym_images, pfile);
+    	
+    	try{
+    	
+	        if (name.equals("images")) {
+	        	
+	        	gym_images = item.getName();
+	        	System.out.println("----------> " + gym_images);
+	        	
+	            arr.add(gym_images);
+	        	pfile = item.get();
+	        	System.out.println(arr.toString());
+	            //서버에 사진 저장
+	            String root = application.getRealPath(java.io.File.separator);
+	      /*       System.out.println("루트 ------------------\n " + root); */
+	            FileUtil.saveImage(root, gym_images, pfile);
+	        }
+	        
+    	} catch (Exception e) {
+    		chk = 0;
+    		break;
+    	}
             
 	}
 }
-}
 
 
-System.out.println("while 후---------------");
+
+/* System.out.println("while 후---------------");
 System.out.println(gym_name);
 System.out.println(gym_content);
 System.out.println(gym_addr);
 System.out.println(gym_salary);
-System.out.println(gym_images);
+System.out.println(gym_images); */
+
 //디비에 게시물 모든 정보 전달
 GymDAO dao = new GymDAO();
-if (dao.insert(gym_name, gym_content, gym_addr, gym_salary, gym_images)) {
+boolean b = true;
+
+if(chk == 1){ 
+	b = dao.insert(gym_name, gym_content, gym_addr, gym_salary, arr);
+} else {
+	b = dao.insert(gym_name, gym_content, gym_addr, gym_salary);
+}
+	
+if(b){
 	response.sendRedirect("gymlist.jsp");
 }
 %>

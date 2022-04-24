@@ -4,22 +4,31 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   
+<%request.setCharacterEncoding("utf-8"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>상품 목록</title>
+<!-- <link href="/css/default.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
+<%-- <header id="header">
+<%@ include file="/html/pieceHeader.html" %>
+
+</header> --%>
+	<!-- CSS only -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+		crossorigin="anonymous">
+
+
    <%!// 선언문
    String title = "구인 목록";%>
-   <!-- CSS only -->
-   <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous">
 
 
    <div class="alert alert-secondary" role="alert">
@@ -54,9 +63,11 @@
         	 <p>소개 : <%=product.getGym_content()%></p>
         	 <p>주소 : <%=product.getGym_addr()%></p>
         	 <p>급여 : <%=product.getGym_salary()%></p>
+        	 
   	</div>
 
       <% } %>
+        	 <a href="gymwrite.jsp" class="btn btn-secondary">업체등록</a>
 
       </div>
       <hr>

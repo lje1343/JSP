@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.naming.NamingException;
@@ -17,17 +18,17 @@ public class GymDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
-	
+	 
 	
 	// gymdetail.jsp
-	public GymDTO getGym(int user_no) {
+	public GymDTO getGym(String user_no) throws NamingException, SQLException {
 		String sql = "SELECT * FROM gym WHERE user_no = ?";
 		GymDTO gym = null;
 		UserDTO user = new UserDAO().getUser(user_no);
 		try {
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, user_no);
+			pstmt.setString(1, user_no);
 			rs = pstmt.executeQuery();
 			rs.next();
 			gym = new GymDTO(
@@ -90,7 +91,7 @@ public class GymDAO {
 			rs_inner = pstmt.executeQuery();
 			
 			while(rs_inner.next()) {
-				int u_no = rs_inner.getInt("user_no");
+				String u_no = rs_inner.getString("user_no");
 				gyms.add(getGym(u_no));
 			}
 			
@@ -118,7 +119,7 @@ public class GymDAO {
 	
 	/* String gym_no, String user_no, String gym_secret, String gym_regdate, */
 	
-	// gymwrite.jsp
+	// gymwrite.jsp (IMAGES -> O)
 	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary, String gym_images)
 	throws NamingException, SQLException {
 		
@@ -129,13 +130,13 @@ public class GymDAO {
 			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,?)";
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, 1);
+				pstmt.setInt(1, 8);
 				pstmt.setString(2, gym_name);
 				pstmt.setString(3, gym_content);
 				pstmt.setString(4, gym_addr);
 				pstmt.setString(5, gym_salary);
 				pstmt.setInt(6, 0);
-				pstmt.setString(7, LocalDate.now().toString());
+				pstmt.setString(7, LocalDateTime.now().toString());
 				pstmt.setString(8, gym_images);
 			int result = pstmt.executeUpdate();
 			
@@ -146,5 +147,72 @@ public class GymDAO {
 			if(conn != null) conn.close();
 		}
 	}
+
+	// gymwrite.jsp (IMAGES -> X)
+	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary)
+			throws NamingException, SQLException {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,NULL)";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 2);
+			pstmt.setString(2, gym_name);
+			pstmt.setString(3, gym_content);
+			pstmt.setString(4, gym_addr);
+			pstmt.setString(5, gym_salary);
+			pstmt.setInt(6, 0);
+			pstmt.setString(7, LocalDateTime.now().toString());
+			int result = pstmt.executeUpdate();
+			
+			return (result==1) ? true : false;			
+			
+		} finally {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+	}
+	
+	// gymwrite.jsp (IMAGES -> O)
+	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary, ArrayList<String> arr)
+	throws NamingException, SQLException {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String gym_images = "";
+		
+		for(String i : arr) {
+			gym_images += i + "/";
+		}
+		
+		
+		try {
+			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,?)";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, 8);
+				pstmt.setString(2, gym_name);
+				pstmt.setString(3, gym_content);
+				pstmt.setString(4, gym_addr);
+				pstmt.setString(5, gym_salary);
+				pstmt.setInt(6, 0);
+				pstmt.setString(7, LocalDateTime.now().toString());
+				pstmt.setString(8, gym_images);
+			int result = pstmt.executeUpdate();
+			
+			return (result==1) ? true : false;			
+			
+		} finally {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+	}
+	
+	
+	
 }
 

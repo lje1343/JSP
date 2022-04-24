@@ -1,3 +1,4 @@
+<%@page import="java.util.StringTokenizer"%>
 <%@page import="jdbc.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+    <script>
+    // 이력서제출 팝업창
+    function resume(trainer_no, gym_no){
+
+    	
+      var result = confirm("이력서를 제출하시겠습니까?");
+      
+      if(result == true) {
+    	  alert("이력서 제출이 완료되었습니다.")
+    	  location.href = "gymdetaildb.jsp?trainer_no=" + trainer_no + "&gym_no=" + gym_no;
+      } else {
+    	  alert("취소되었습니다.")
+      } 
+    	
+    }
+    </script>
+
 	<%
 		// 선언문
 	String title = "구인 상세";
@@ -31,13 +50,14 @@
 	
 	<%
 
-		int gym_no = Integer.parseInt(request.getParameter("gym_no"));
+		String gym_no = request.getParameter("gym_no");
 	
-		GymDTO product = (new GymDAO()).getGym(gym_no);	
+		GymDTO gym = (new GymDAO()).getGym(gym_no);	
+		TrainerDTO trainer = (new TrainerDAO()).getTrainer("9");	
 		System.out.println();
 		
-		String addr = product.getGym_addr();
-		String name = product.getGym_name();
+		String addr = gym.getGym_addr();
+		String name = gym.getGym_name();
 	%>
 	
 	<div class = "container">
@@ -46,13 +66,35 @@
 		
 	</div>
 	<div class = "col-ma-6">
-      	 <p>번호 : <%=product.getGym_no()%></p>
-      	 <p>업체명 : <%=product.getGym_name() %></p>
-      	 <p>소개 : <%=product.getGym_content()%></p>
-      	 <p>주소 : <%=product.getGym_addr()%></p>
-      	 <p>등록날짜 : <%=product.getGym_regdate()%></p>
-      	 <p>급여 : <%=product.getGym_salary()%></p>
-		<a href="gymlist.jsp" class="btn btn-secondary">구인목록</a>
+	
+	<%
+	
+		if(gym.getGym_images() != null){
+			
+			StringTokenizer st = new StringTokenizer(gym.getGym_images(), "/");	// 매개변수를 2개 입력, 첫번째: 가공할 문자열 / 두번째: 구분자
+			
+			while(st.hasMoreTokens()){	//hasMoreTokens 다음 토큰이 존재하는지 불린타입으로 반환
+			
+	%>
+    
+    
+      	 <img src = "/images/<%=st.nextToken() %>" style="width:150px; height:250px">	<!-- nextToken 하나씩 가져옴 -->
+	
+	
+	<% 	}
+			} %>
+      	
+      	 <p>번호 : <%=gym.getGym_no()%></p>
+      	 <p>사업자 : <%=gym.getUser_name()%></p>
+      	 <p>업체명 : <%=gym.getGym_name() %></p>
+      	 <p>소개 : <%=gym.getGym_content()%></p>
+      	 <p>주소 : <%=gym.getGym_addr()%></p>
+      	 <p>등록날짜 : <%=gym.getGym_regdate()%></p>
+      	 <p>급여 : <%=gym.getGym_salary()%></p>
+      	 
+      	 <input type='button' name="user_from_no" style='width:200px; height:50px;' value='이력서제출' onclick='resume(<%=trainer.getTrainer_no()%>,<%=gym.getGym_no()%>)'/>
+		
+		<a href="gymlist.jsp" class="btn btn-secondary">뒤로가기</a>
 		
 		
 		

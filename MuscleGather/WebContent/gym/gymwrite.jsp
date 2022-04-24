@@ -112,7 +112,7 @@ form label em {
 			<div class="form-group row">
 			  <label class="col-sm-2" for="formFileSm">업체사진</label>
 			  <div class="col-sm-3">
-			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file">
+			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple>
 			</div>
 			</div>	
 			
@@ -188,6 +188,8 @@ form label em {
 				<input type="reset" class="btn btn-danger" value="취소">
 			</div>	
 			</div>	
+			
+			<a href="gymlist.jsp" class="btn btn-secondary">구인목록</a>
 			
 		</form>
 	</div>
