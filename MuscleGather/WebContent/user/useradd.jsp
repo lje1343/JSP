@@ -54,54 +54,49 @@ form label em {
             }
         }
    		
-   		// 이메일 인증
-   		// 유효성 검사 (1)
-   		function emailAuthentication(){	//결과값이 true면 이메일정보를 get방식으로 전송, 아닐경우 실행x
-   			console.log("1");
-			if (!emailValCheck()){
-		    	return false;
-		    }
-			var url = "confirmEmail.four?user_email=" + document.signUpForm.user_email.value;
-			open(url, "confirm",
-					"toolbar=no, location=no,menubar=no,scrollbars=no,resizable=no,width=300,height=200");
-		}
    		
-   		// 유효성 검사 (2)
-   		function emailValCheck(){
-   				console.log("2");
-   		//이메일을 포함하는 form의 위치
-   		const form = document.signUpForm;
+   		// email 유효성 검사 (1)
+   		function emailValCheck(user_email){
+
    			// 이메일 정규식 패턴
    			var emailPattern= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-   			var email = form.user_email.value;
+   			var email = user_email;
    			if(!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
    				return false;
    			}
    		    return true;
    		}
    		
-   		// 유효성 검사 (3)
+   		// email 유효성 검사 (2)
    		function check(pattern, taget, message) {
-   			console.log("3");
+
    			if(pattern.test(taget)) {
    		    	return true;
    		    }
    		    alert(message);
-   		    /* taget.focus(); */
    		    return false;
    		}
    		
    		
-   		
-   		
+   		//email 중복체크 
+   		function emailCheck(){ 
+   			
+   			const user_email = document.getElementById("user_email").value;
+   			
+   			
+   			var chk = emailValCheck(user_email);
+   			
+   			if(user_email != "" && chk){
+   			//새창 만들기 
+   			
+   			
+   			window.open("emailCheckPro.jsp?user_email=" + user_email , "emailwin", "width=400, height=350"); 
+   			}
+   				
+   		}
+   			
     </script>
     
-<%--     <%
-    
-    	MailServlet ms = new MailServlet();
-    HttpServletRequest req = new HttpServletRequest();
-    
-    %> --%>
     
 	<%!// 선언문
 	String title = "회원 가입";%>
@@ -127,9 +122,11 @@ form label em {
 		<div class="form-group row">
 				<label class="col-sm-2">이메일<em> * </em></label>
 				<div class="col-sm-3">
-					<input type="email" name="user_email" id="inputEmailForm" class="form-control">
+					<input type="email" name="user_email" id="user_email" class="form-control">
+					<input type="button" value="Email 중복확인" onclick="emailCheck()">
 				</div>
-				<div class="col-sm-2">
+				<!-- 이메일 인증 API -->
+<!-- 				<div class="col-sm-2">
 					<button onclick="" id="emailAuthbtn" type="button" class="btnChk">인증 메일 전송</button>
 				</div>
 
@@ -143,7 +140,7 @@ form label em {
 					<button onclick="authCode()" id="authcode" disabled="disabled" type="button" class="btnChk">인증 확인</button>
 				</div>
 				
-			</div></div>
+			</div></div> -->
 			
 			
 			

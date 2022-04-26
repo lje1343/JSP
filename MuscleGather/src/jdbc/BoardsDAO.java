@@ -144,7 +144,8 @@ public class BoardsDAO {
   	}
   	
 */
-      
+ 
+/*
   	// noticelist.jsp
   	public ArrayList<BoardsDTO> nngetList(){
   		String sql = "SELECT user_no FROM notice_board";
@@ -180,7 +181,9 @@ public class BoardsDAO {
   		
   		return notices;
   	}
-  	
+*/
+      
+      
 	// notice_board 전체 row 숫자 세기
 	public int getNoticeCount() throws NamingException, SQLException, Exception {
 		Connection conn = null;
@@ -205,7 +208,6 @@ public class BoardsDAO {
 			if(conn != null) conn.close(); 
 		}
 	}
-	
-  	
-  	
+
+      
 }

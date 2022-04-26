@@ -33,8 +33,10 @@
 		 user_gender, user_email, user_phone);
  
  if(result == 1) {
+	out.print("<script>alert('회원가입이 완료되셨습니다.')</script>");
 	 response.sendRedirect("/gym/gymlist.jsp");	// 임시로 지정해놓음
  }else{
+	out.print("<script>alert('다시 시도해주세요.')</script>");
 	 response.sendRedirect("/user/useradd.jsp");
  }
  %>

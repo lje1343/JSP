@@ -111,5 +111,33 @@ public class UserDAO {
 		}
 	}
 	
+	// emailCheckPro.jsp (이메일중복체크)
+	public int duplecateID(String user_email){ 
+		int cnt=0; 
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{ 
+			//아이디 중복 확인 
+			
+			String sql = "SELECT count(user_email) as cnt FROM user WHERE user_email = ?";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_email); 
+			rs = pstmt.executeQuery(); 
+			
+			if(rs.next()){ 
+				cnt=rs.getInt("cnt"); 
+				} 
+			}catch(Exception e){ 
+				System.out.println("이메일 중복 확인 실패 : " + e); 
+		}
+	
+		return cnt;
+	}
+
+	
 	
 }

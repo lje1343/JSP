@@ -91,6 +91,7 @@ int next_block_start_pageno = 0;     //다음 블럭 시작 페이지 번호
         	 <p>번호 : <%=notice.getBoards_no()%></p>
         	 <p>제목 : <a href="noticedetail.jsp?boards_no=<%=notice.getBoards_no() %>"><%=notice.getBoards_title() %></a>
         	 <p>날짜 : <%=notice.getBoards_regdate()%></p>
+        	 <p>조회수 : <%=notice.getView_cnt()%></p>
         	 
         	 
   	</div>

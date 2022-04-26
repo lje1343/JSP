@@ -2,6 +2,7 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ import util.ConnectionPool;
 public class JoinDAO {
 
 	
-	// gymdetail.jsp(resume)
+	// gymdetail.jsp (이력서제출 버튼 클릭시)
 	public boolean resumeinsert(String user_from_no, String user_to_no)
 			throws NamingException, SQLException {
 				
@@ -34,10 +35,31 @@ public class JoinDAO {
 					if(conn != null) conn.close();
 				}
 			}
+
 	
+	// gymdetail.jsp (이력서제출 카운트) 
+	public String resumeCount(String gym_no) throws NamingException, SQLException, Exception {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String count = "";
+		
+		try {
+			String sql = "SELECT COUNT(*) as count FROM resume WHERE user_to_no = ?";
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, gym_no);
+			rs = pstmt.executeQuery();
+			
+			rs.next(); 
+			count = rs.getString("count");
+			
+			return count;
+		}finally {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close(); 
+		}
+	}
 	
-			/*	join> gym_no/trainer_no
-			 * SELECT gym_no, trainer_no FROM gym AS g INNER JOIN trainer AS t ON g.user_no
-			 * = t.user_no;
-			 */
 }

@@ -52,21 +52,22 @@
 
 		String user_no = request.getParameter("user_no");
 	
-		GymDTO gym = (new GymDAO()).getGym(user_no);	
-		TrainerDTO trainer = (new TrainerDAO()).getTrainer("9");	
+		GymDTO gym = (new GymDAO()).getGym(user_no); // 헬스장 유저의 정보를 모두 불러온다.
+		TrainerDTO trainer = (new TrainerDAO()).getTrainer("9"); // 페이지를 보고있는 트레이너의 번호
+		String resumecnt = new JoinDAO().resumeCount(gym.getGym_no()); 	// resume 카운트
 		System.out.println();
 		
 		String addr = gym.getGym_addr();
 		String name = gym.getGym_name();
 	%>
 	
-	<div class = "container">
+	<div class = "container"> 
 	<div class = "row">
 	<div class = "col-ma-5">
 		
 	</div>
 	<div class = "col-ma-6">
-	
+
 	<%
 	
 		if(gym.getGym_images() != null){
@@ -84,6 +85,7 @@
 	<% 	}
 			} %>
       	
+      	 <p>이력서제출횟수 : <%=resumecnt%></p>
       	 <p>번호 : <%=gym.getGym_no()%></p>
       	 <p>사업자 : <%=gym.getUser_name()%></p>
       	 <p>업체명 : <%=gym.getGym_name() %></p>
@@ -92,6 +94,7 @@
       	 <p>등록날짜 : <%=gym.getGym_regdate()%></p>
       	 <p>급여 : <%=gym.getGym_salary()%></p>
       	 
+      	 <!-- to -> 받는사람(헬스장) from -> 보낸사람(트레이너) -->
       	 <input type='button' name="user_from_no" style='width:200px; height:50px;' value='이력서제출' onclick='resume(<%=trainer.getTrainer_no()%>,<%=gym.getGym_no()%>)'/>
 		
 		<a href="gymlist.jsp" class="btn btn-secondary">뒤로가기</a>
