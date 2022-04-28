@@ -152,7 +152,7 @@ ul.noneStyle > li {
 
 /*컨트롤 class*/
 body{
-  background: #000000;
+  background: #ffffff; 
   color: #f3a950;
 }
 
@@ -212,11 +212,12 @@ input[type="password"],
 input[type="date"],
 input[type="tel"],
 input[type="submit"],
+input[type="reset"],	/* 220426 - 이지은 reset 설정 추가 */
 select {
     width: 100%;
     height: 35px;
 }
-
+ 
 input[type="submit"]:hover,
 input[type="button"]:hover {
   background: #666666;

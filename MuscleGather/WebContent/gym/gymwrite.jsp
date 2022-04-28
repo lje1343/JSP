@@ -4,7 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>업체 등록</title>
+<link type="text/css" rel="stylesheet" href="../css/default.css" />
+
+<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../js/default.js"></script>
+
 
 	<script>
 	// form 검증(validation)
@@ -36,62 +43,67 @@
 	}
 	</script>
 	
-	
-<style>
-form label em {
-	font-size : 15px;
-	color: red;
-	font-weight: 800;
-	}
-	
-</style>
+<link href="gymlist.css" rel="stylesheet" type="text/css">
 	
 </head>
+
+
 <body>
-	<%!// 선언문
-	String title = "업체 등록";%>
-	<!-- CSS only -->
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-		crossorigin="anonymous">
 
-<%-- 	<%@ include file="/_header.jsp"%> --%>
-	<div class="alert alert-secondary" role="alert">
-		<div class="container">
-			<h1 class="display-3">
-				<%=title%>
-			</h1>
-		</div>
-	</div>
+	<%
+		// 선언문
+	String title = "업체 등록";
+	%>
+		
+    <div class="wrap">
+        <!-- header-->
+        <header id="header">
+	
+        </header>
 
+        <!-- hidden nav-->
+        <nav id="nav"></nav>
+        
+        <main>
+    <div class="mainWrap">
+       <section class="sec1">
+            <!-- 컨탠츠 구역 -->
+       <div class="mainboard bd3" style="margin: auto;width:80%;">
+        
 	<div class="container" align="Center">
 		<form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
 		
 			
 
+		<div class="ct">
+			<h1 class="display-3">
+				<%=title%>
+			</h1>
+		</div>
+
+	<hr>
+			
+
 			<div class="form-group row">
 				<label class="col-sm-2">업체명<em> * </em></label>
 				<div class="col-sm-3">
-					<input type="text" name="gym_name" class="form-control">
-				</div>
+					<input type="text" name="gym_name" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
+				</div><br>
 
 			<div class="form-group row">
 				<label class="col-sm-2">업체 소개<em> * </em></label>
 				<div class="col-sm-3">
-					<textarea name="gym_content" cols="50" rows="8" class="form-control">
-					</textarea>
-				</div>
+				<textarea name="gym_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
+				</div><br>
 				
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">지급 연봉</label>
 				<div class="col-sm-3">
-					<input type="text" name="gym_salary" class="form-control">
+					<input type="text" name="gym_salary" class="form-control" style="height:50px;">
 				</div>
 
-			</div>
+			</div><br>
 
 
 			</div>
@@ -111,17 +123,17 @@ form label em {
 			
 			<div class="form-group row">
 			  <label class="col-sm-2" for="formFileSm">업체사진</label>
-			  <div class="col-sm-3">
-			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple>
+			  <div class="col-sm-3" style="border:1px solid #666666;">
+			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple style="height:50px;">
 			</div>
 			</div>	
-			
-			
+			<br><br>
+						
 <!-- 주소api  -->
 <div class="form-group row">
 <div class="col-sm-3">
-<input type="text" id="sample5_address" name="gym_addr" placeholder="*업체주소">
-<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br>
+<input type="text" id="sample5_address" name="gym_addr" placeholder="업체주소를 검색해주세요." style="height:50px;"><br>
+<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
 </div></div>
 <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -180,31 +192,43 @@ form label em {
     
 </script>
 
+ 
 
-
-			<div class="form-group row" align="center">
-			<div class="col-sm-10">
-				<input type="submit" class="btn btn-primary" value="등록">
-				<input type="reset" class="btn btn-danger" value="취소">
+			<div class="form-group row" style="width:100%; display:flex; justify-content:flex-end;" align="center">
+					<div style="width:125px;">
+					<input type="submit" class="btn btn-primary" value="등록">
+					</div>
+					<div style="width:125px; margin-left:20px;">
+					<input type="reset" class="btn btn-primary" value="초기화">
+					</div>
 			</div>	
-			</div>	
-			
-			<a href="gymlist.jsp" class="btn btn-secondary">구인목록</a>
 			
 		</form>
 	</div>
+	
+	</div>
+	
+	 </section>
 
+            </div>
+        </main>
+        
+ <footer id="footer">
 
-<%-- 	<%@ include file="/_footer.jsp"%>
- --%>
+        </footer>
 
-	<!-- JavaScript Bundle with Popper -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-
-
+        <!-- side butten -->
+        <article id="sideBtn">
+            <div class="sideLinkWrap">
+                <label id="" for="">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+        </article>
+    </div>
 
 </body>
 </html>

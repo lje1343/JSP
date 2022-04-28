@@ -1,0 +1,15 @@
+form label em {
+	font-size : 15px;
+	color: red;
+	font-weight: 800;
+	}
+
+.ct{
+	height: 80px;
+	text-align: start;
+	margin-top:80px;
+}
+textarea{
+	width: 100%;
+    resize: none;
+}

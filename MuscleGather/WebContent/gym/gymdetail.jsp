@@ -19,7 +19,6 @@
       var result = confirm("이력서를 제출하시겠습니까?");
       
       if(result == true) {
-    	  alert("이력서 제출이 완료되었습니다.")
     	  location.href = "gymdetaildb.jsp?trainer_no=" + trainer_no + "&gym_no=" + gym_no;
       } else {
     	  alert("취소되었습니다.")

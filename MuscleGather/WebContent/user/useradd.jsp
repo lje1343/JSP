@@ -89,10 +89,18 @@ form label em {
    			if(user_email != "" && chk){
    			//새창 만들기 
    			
-   			
    			window.open("emailCheckPro.jsp?user_email=" + user_email , "emailwin", "width=400, height=350"); 
-   			}
-   				
+   			
+   			}	
+   		}
+   		
+   		// email 인증
+   		function emailAuth(){
+   			
+   			const user_email = document.getElementById("user_email").value;  			
+   			
+   			window.open("useremailsend.jsp?user_email=" + user_email , "emailwin", "width=400, height=350");
+   			
    		}
    			
     </script>
@@ -124,6 +132,7 @@ form label em {
 				<div class="col-sm-3">
 					<input type="email" name="user_email" id="user_email" class="form-control">
 					<input type="button" value="Email 중복확인" onclick="emailCheck()">
+					<input type="button" value="Email 메일인증" onclick="emailAuth()"> <!-- disabled id="dischk" -->
 				</div>
 				<!-- 이메일 인증 API -->
 <!-- 				<div class="col-sm-2">
