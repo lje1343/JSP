@@ -62,23 +62,22 @@
             color: #666666;
         }
     </style>
-    <script>
-        $(document).ready(function () {
-            //tab manu 컨트롤
-            $('.tabBtnCell > input').click(function () {
-                var tab_id = $(this).attr('data-tab');
-                $('.tabCell>div[id^="content"]').removeClass('on');
-                $('#' + tab_id).addClass('on');
-            })
-        })
-
-    </script>
-
 
 </head>
 <body>
 
    <script>
+   
+   		// 헬스장/트레이너 버튼
+	   $(document).ready(function () {
+	       //tab manu 컨트롤
+	       $('.tabBtnCell > input').click(function () {
+	           var tab_id = $(this).attr('data-tab');
+	           $('.tabCell>div[id^="content"]').removeClass('on');
+	           $('#' + tab_id).addClass('on');
+	       })
+	   })
+   
    
    		// 비밀번호 유효성 검사
         function check_pw(){
@@ -369,7 +368,26 @@
     }
 </script>
 			
+<body>
+    <div>
+        <!-- header-->
+        <header id="admheader">
 
+        </header>
+
+        <!-- hidden nav-->
+        <nav id="admnav"></nav>
+
+        <main>
+            <div class="mainWrap">
+                <section class="sec1">
+                    <!-- form 태그-->
+                    <form action="">
+
+                        <div class="boardCell">
+                            <!-- 상단 입력-->
+                            상단 입력
+                        </div>
                         <!-- 하단 입력-->
                         <div class="tabmanu">
                             <div class="tabCell">
@@ -378,7 +396,7 @@
                                         checked>
                                     <label for="btn1">트레이너</label>
                                     <input type="radio" id="btn2" name="mb_type" class="hidden" data-tab="content2">
-                                    <label for="btn2">헬스장</label>
+                                    <label for="btn2">핼스장</label>
                                 </div>
 
                                 <div class="on" id="content1">
@@ -392,6 +410,14 @@
                             </div>
 
                         </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+
+    </div>
+</body>
 
 
 			<div>

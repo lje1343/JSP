@@ -18,11 +18,11 @@
 <script type="text/javascript" src="../js/default.js"></script>
 
 
-<link href="useradd.css" rel="stylesheet" type="text/css">
+
     <style>
         .tabmanu {
             margin: auto;
-            width: 100%;
+            width: 50%;
             height: 450px;
             border: 1px solid #666666;
         }
@@ -61,7 +61,11 @@
             background: #ffffff;
             color: #666666;
         }
+        
     </style>
+    
+    <link href="useradd.css" rel="stylesheet" type="text/css">
+    
     <script>
         $(document).ready(function () {
             //tab manu 컨트롤
@@ -73,131 +77,27 @@
         })
 
     </script>
-
-
 </head>
+
+
+
 <body>
-
-   <script>
-   
-   		// 비밀번호 유효성 검사
-        function check_pw(){
- 
-            var pw = document.getElementById('pw').value;
-            var SC = ["!","@","#","$","%"];
-            var check_SC = 0;
- 
-            if(pw.length < 6 || pw.length>16){ 
-                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
-                document.getElementById('pw').value='';
-            }
-            for(var i=0;i<SC.length;i++){
-                if(pw.indexOf(SC[i]) != -1){
-                    check_SC = 1;
-                }
-            }
-            if(check_SC == 0){
-                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
-                document.getElementById('pw').value='';
-            }
-            if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
-                if(document.getElementById('pw').value==document.getElementById('pw2').value){
-                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-                    document.getElementById('check').style.color='blue';
-                }
-                else{
-                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
-                    document.getElementById('check').style.color='red';
-                }
-            }
-        }
-   		
-   		
-   		// email 유효성 검사 (1)
-   		function emailValCheck(user_email){
-
-   			// 이메일 정규식 패턴
-   			var emailPattern= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-   			var email = user_email;
-   			if(!check(emailPattern, email, "유효하지 않은 이메일 주소입니다.")) {
-   				return false;
-   			}
-   		    return true;
-   		}
-   		
-   		// email 유효성 검사 (2)
-   		function check(pattern, taget, message) {
-
-   			if(pattern.test(taget)) {
-   		    	return true;
-   		    }
-   		    alert(message);
-   		    return false;
-   		}
-   		
-   		
-   		//email 중복체크 
-   		function emailCheck(){ 
-   			
-   			const user_email = document.getElementById("user_email").value;
-   			
-   			
-   			var chk = emailValCheck(user_email);
-   			
-   			if(user_email != "" && chk){
-   			//새창 만들기 
-   			
-   			window.open("emailCheckPro.jsp?user_email=" + user_email , "emailwin", "width=400, height=350"); 
-   			
-   			}	
-   		}
-   		
-   		// email 인증
-   		function emailAuth(){
-   			
-   			const user_email = document.getElementById("user_email").value;  			
-   			
-   			window.open("useremailsend.jsp?user_email=" + user_email , "emailwin", "width=400, height=350");
-   			
-   		}
-   			
-    </script>
-    
-    
-	<%!// 선언문
-	String title = "회원 가입";
-	%>
-	
- <div class="wrap">
+    <div class="wrap">
         <!-- header-->
-        <header id="header">
-	<%@include file="/html/pieceHeader.jsp" %>
+        <header id="admheader">
+
         </header>
 
         <!-- hidden nav-->
-        <nav id="nav"></nav>
-        
+        <nav id="admnav"></nav>
+
         <main>
-    <div class="mainWrap">
-       <section class="sec1">
-            <!-- 컨탠츠 구역 -->
-       <div class="mainboard bd3" style="margin: auto;width:80%;">
-        
-	<div class="container" align="Center">
-		
-			
+            <div class="mainWrap">
+                <section class="sec1">
+                    <!-- form 태그-->
+                     <form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm">
 
-		<div class="ct">
-			<h1 class="display-3">
-				<%=title%>
-			</h1>
-		</div>
-
-	<hr>
-	
-
-		<form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm">
-			
+                        <div class="boardCell">			
 			
 				<div class="roww">
 					<div>
@@ -368,8 +268,11 @@
         }).open();
     }
 </script>
-			
 
+			
+                            <!-- 상단 입력-->
+                            상단 입력
+                        </div>
                         <!-- 하단 입력-->
                         <div class="tabmanu">
                             <div class="tabCell">
@@ -378,7 +281,7 @@
                                         checked>
                                     <label for="btn1">트레이너</label>
                                     <input type="radio" id="btn2" name="mb_type" class="hidden" data-tab="content2">
-                                    <label for="btn2">헬스장</label>
+                                    <label for="btn2">핼스장</label>
                                 </div>
 
                                 <div class="on" id="content1">
@@ -392,32 +295,20 @@
                             </div>
 
                         </div>
-
-
-			<div>
+                        
+                        			<div>
 				<div class="subbtn">
 					<input type="submit" class="btn btn-primary" value="등록" disabled id="dischk">
 					</div>
 			</div>	
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		</form>
-					</div></div>
-				</section>
-			</div>
-		</main>	
-		
+                    </form>
+                </section>
+            </div>
+        </main>
 
- <footer id="footer">
-<%@include file="/html/pieceFooter.jsp" %>
+        <footer id="footer">
+
         </footer>
 
         <!-- side butten -->
@@ -431,7 +322,7 @@
                 </label>
             </div>
         </article>
-	</div>
-
+    </div>
 </body>
+
 </html>

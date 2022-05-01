@@ -1,10 +1,10 @@
 //페이지 링크
 
 $(document).ready(function () {
-  $("#header").load("/../../html/pieceHeader.html");
+  $("#header").load("/html/pieceHeader.html");
   // $("#nav").load("../html/pieceNav.html");
   // $("#sideBar").load("/html/pieceSidebar.html");
-  $("#footer").load("/../../html/pieceFooter.html");
+  $("#footer").load("/html/pieceFooter.html");
 });
 
 // 페이지 오픈  이벤트

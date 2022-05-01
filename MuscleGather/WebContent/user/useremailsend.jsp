@@ -9,24 +9,46 @@
 <html> 
 <head> 
 <meta charset="UTF-8"> 
-<title>.</title> 
-</head> 
+<title>usermailsend</title> 
+
+<script>
+
+	// 인증번호 확인
+	function authCheck(authnum){
+		
+		var chk = document.getElementById("inputnum").value;
+	
+		if(authnum==chk){
+			alert('인증이 완료되셨습니다.');
+			window.close();
+			
+		}else{
+			alert('다시 입력해주세요.');
+		}
+		
+		
+	}
+
+</script>
+
+</head>
 
 <body> 
     
 <%
 request.setCharacterEncoding("utf-8");       //한글처리
 
+String to = request.getParameter("user_email");
 Random rnd = new Random();
 
-int authnum = rnd.nextInt(99999) + 10000;
+int authnum = rnd.nextInt(89999) + 10000;
 
 
 //넘겨받은 변수 처리
 
 Map<String, String> emailInfo = new HashMap<String, String>();
 emailInfo.put("from", "udh1343@naver.com"); //보내는 사람
-emailInfo.put("to", request.getParameter("to")); //받는 사람
+emailInfo.put("to", to); //받는 사람
 emailInfo.put("subject", "'근육 모아' 인증번호입니다."); //제목
 
 //내용은 html text 형태에 따라 다르게 설정
@@ -70,8 +92,8 @@ try {
 
 %>
 인증번호 
-<input type="text" name="user_email" id="user_email">
-<input type="button" onclick="authCheck()">
+<input type="text" name="user_email" id="inputnum">
+<input type="button" onclick="authCheck(<%=authnum %>)" value="확인">
 
 </body>
 </html>

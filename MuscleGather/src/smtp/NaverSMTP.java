@@ -34,7 +34,7 @@ public class NaverSMTP {
         auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("austiny", ".hwwZ9wMT7@*fNw");
+                return new PasswordAuthentication("udh1343", "udh010524842484");
             }
         };
     }

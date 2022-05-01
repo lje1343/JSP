@@ -43,8 +43,27 @@
 	}
 	</script>
 	
-<link href="gymwrite.css" rel="stylesheet" type="text/css">
 	
+<style>
+
+	form label em {
+		font-size : 15px;
+		color: red;
+		font-weight: 800;
+		}
+	
+	.ct{
+		height: 80px;
+		text-align: start;
+		margin-top:80px;
+	}
+	textarea{
+		width: 100%;
+	    resize: none;
+	}
+
+</style>
+
 </head>
 
 
@@ -85,33 +104,25 @@
 			
 
 			<div class="form-group row">
-				<label class="col-sm-2">업체명<em> * </em></label>
+				<label class="col-sm-2">제목<em> * </em></label>
 				<div class="col-sm-3">
-					<input type="text" name="gym_name" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
+					<input type="text" name="trainer_title" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
 				</div><br>
 
 			<div class="form-group row">
-				<label class="col-sm-2">업체 소개<em> * </em></label>
+				<label class="col-sm-2">소개란<em> * </em></label>
 				<div class="col-sm-3">
-				<textarea name="gym_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
+				<textarea name="trainer_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
 				</div><br>
 				
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-2">지급 연봉</label>
-				<div class="col-sm-3">
-					<input type="text" name="gym_salary" class="form-control" style="height:50px;" placeholder="지급 연봉을 작성해주세요.">
-				</div>
-
-			</div><br>
-
 
 			</div>
 
 
 			
 			<div class="form-group row">
-			  <label class="col-sm-2" for="formFileSm">업체사진</label>
+			  <label class="col-sm-2" for="formFileSm">트레이너사진</label>
 			  <div class="col-sm-3" style="border:1px solid #666666;">
 			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple style="height:50px;">
 			</div>
@@ -122,7 +133,7 @@
 <div class="form-group row">
 <div style="display:flex;">
 <div class="col-sm-3" style="text-align:left;">
-<input type="text" id="sample5_address" name="gym_addr" placeholder="업체주소를 검색해주세요." style="height:50px;width:950px;"><br>
+<input type="text" id="sample5_address" name="trainer_addr" placeholder="주소를 검색해주세요." style="height:50px;width:950px;"><br>
 </div>
 &nbsp;&nbsp;&nbsp;<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
 </div>

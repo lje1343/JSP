@@ -2,9 +2,6 @@
 <%@page import="javax.servlet.http.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%request.setCharacterEncoding("UTF-8"); %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,64 +14,16 @@
 <script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="../js/default.js"></script>
 
+<style>
+form label em {
+	font-size : 15px;
+	color: red;
+	font-weight: 800;
+	}
+	
+</style>
 
-<link href="useradd.css" rel="stylesheet" type="text/css">
-    <style>
-        .tabmanu {
-            margin: auto;
-            width: 100%;
-            height: 450px;
-            border: 1px solid #666666;
-        }
-
-        .tabBtnCell {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        label[for^='btn'] {
-            width: 50%;
-            padding: 10px;
-            height: 45px;
-            background: #666666;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        div[id^="content"] {
-            display: none;
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-        }
-
-        div[id^="content"].on {
-            display: block;
-        }
-
-        .tabBtnCell>label[for^='btn']:hover {
-            background: #e5e5e5;
-            color: #666666;
-        }
-
-        .tabBtnCell>input[id^='btn']:checked+label {
-            background: #ffffff;
-            color: #666666;
-        }
-    </style>
-    <script>
-        $(document).ready(function () {
-            //tab manu 컨트롤
-            $('.tabBtnCell > input').click(function () {
-                var tab_id = $(this).attr('data-tab');
-                $('.tabCell>div[id^="content"]').removeClass('on');
-                $('#' + tab_id).addClass('on');
-            })
-        })
-
-    </script>
-
-
+<link href="gymwrite.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -171,7 +120,7 @@
  <div class="wrap">
         <!-- header-->
         <header id="header">
-	<%@include file="/html/pieceHeader.jsp" %>
+	
         </header>
 
         <!-- hidden nav-->
@@ -184,6 +133,7 @@
        <div class="mainboard bd3" style="margin: auto;width:80%;">
         
 	<div class="container" align="Center">
+		<form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
 		
 			
 
@@ -196,66 +146,87 @@
 	<hr>
 	
 
-		<form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm">
-			
-			
-				<div class="roww">
-					<div>
-						<label class="lab">이메일<em> * </em></label>
-					</div>
-					<div class="inputbox">
-					<input type="email" name="user_email" id="user_email" placeholder="이메일을 입력해주세요.">
-					</div>
-					<div> 
+	<div class="container" align="Center">
+		<form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8">
+		
+		<div class="form-group row">
+				<label class="col-sm-2">이메일<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="email" name="user_email" id="user_email" class="form-control">
 					<input type="button" value="Email 중복확인" onclick="emailCheck()">
-					</div>
-					<div>
 					<input type="button" value="Email 메일인증" onclick="emailAuth()"> <!-- disabled id="dischk" -->
-					</div>
+				</div>
+				
+				<!-- 이메일 인증 API -->
+<!-- 				<div class="col-sm-2">
+					<button onclick="" id="emailAuthbtn" type="button" class="btnChk">인증 메일 전송</button>
 				</div>
 
 
-				<div class="roww">
+			<div class="form-group row">
+				<label class="col-sm-2">인증번호 입력<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="email" name="user_email" class="form-control">
+				</div>
+				<div class="col-sm-2">
+					<button onclick="authCode()" id="authcode" disabled="disabled" type="button" class="btnChk">인증 확인</button>
+				</div>
+				
+			</div></div> -->
+			
+			
+			
+				
+			<div class="form-group row">
+				<div style="display:flex;">
 					<div>
-						<label class="lab">비밀번호<em> * </em></label>
+						<label class="col-sm-2">비밀번호<em> * </em></label>
 					</div>
-					<div class="inputbox">
-						<input type="text" id="pw" onchange="check_pw()" name="user_pw"placeholder="비밀번호를 입력해주세요.">
+					<div style="margin-left:100px;">
+						<input type="text" id="pw" onchange="check_pw()" name="user_pw" style="width:500px;" placeholder="비밀번호를 입력해주세요.">
 					</div>
 				</div>
-
-
-				<div class="roww">
+			</div>
+			
+			<br>
+			
+			<div class="form-group row">
+				<div style="display:flex;">
 					<div>
-						<label class="lab">비밀번호 확인<em> * </em></label>
+						<label class="col-sm-2">비밀번호 확인<em> * </em></label>
 					</div>
-					<div class="inputbox">
-						<input type="text" id="pw2" onchange="check_pw()"placeholder="비밀번호를 확인해주세요.">
+					<div style="margin-left:62px;">
+						<input type="text" id="pw2" onchange="check_pw()" style="width:500px;" placeholder="비밀번호를 확인해주세요.">
 					&nbsp;<span id="check"></span>
 					</div>
 				</div>
+			</div>
 
+			<br>
 			
-				<div class="roww">
+			<div class="form-group row">
+				<div style="display:flex;">
 					<div>
-						<label class="lab">이름<em> * </em></label>
+						<label class="col-sm-2">이름<em> * </em></label>
 					</div>
-					<div class="inputbox">
-						<input type="text" name="user_name" class="form-control"placeholder="이름을 입력해주세요.">
+					<div style="margin-left:131px;">
+						<input type="text" name="user_name" class="form-control" style="width:500px;" placeholder="이름을 입력해주세요.">
 					</div>
 				</div>
+			</div>
 
-				
+			<br>				
 
-			<div class="roww">
+			<div class="form-group row">
+			<div style="display:flex;">
 				<div>
-				<label class="lab">성별<em> * </em></label>
+				<label class="col-sm-2">성별<em> * </em></label>
 				</div>
-				<div class="inputbox">
-				<div class="col-sm-3">
+				<div>
+				<div class="col-sm-3" style="margin-left:150px;">
 					<div class="form-check form-check-inline">
 					  <input name="user_gender" class="form-check-input" type="radio" id="inlineCheckbox1" value="M">
-					  <label class="form-check-label" for="inlineCheckbox1" style="margin-right:100px">남성</label>
+					  <label class="form-check-label" for="inlineCheckbox1">남성</label>
 					  <input name="user_gender" class="form-check-input" type="radio" id="inlineCheckbox2" value="F">
 					  <label class="form-check-label" for="inlineCheckbox2">여성</label>
 					</div>
@@ -263,60 +234,32 @@
 				</div>
 			</div>
 
-
-			<div class="roww">
-				<div>
-					<label class="lab">생년월일<em> * </em></label>
-				</div>
-				<div class="inputbox">
-					<input type="text" name="user_birth" class="form-control" placeholder="생년월일을 입력해주세요.">
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">생년월일<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="text" name="user_birth" class="form-control">
 				</div>
 			</div>
-			
-							<div class="roww">
-				<div>
-					<label class="lab">전화번호<em> * </em></label>
-				</div>
-				<div class="inputbox">
-					<input type="text" name="user_phone" class="form-control" placeholder="전화번호를 입력해주세요.">
+
+			<div class="form-group row">
+				<label class="col-sm-2">전화번호<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="text" name="user_phone" class="form-control">
 				</div>
 			</div>
-				
-			
+					
 
+<div class="form-group row">
+<div class="col-sm-3">
 <!-- 우편번호/주소/상세주소 api -->
-
-<div class="roww">
-	<div>
-		<label class="lab">우편번호<em> * </em></label>
-	</div>
-	<div class="inputbox">
-	<input type="text" id="zipbox" name="user_zipcode" placeholder="우편번호를 입력해주세요.">
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색">
-	</div>
-</div>				
-
-
-<div class="roww">
-	<div>
-		<label class="lab">주소<em> * </em></label>
-	</div>
-	<div class="inputbox">
-	<input type="text" id="sample6_address" name="user_addr" placeholder="주소를 입력해주세요.">
-	</div>
+<input type="text" id="sample6_postcode" name="user_zipcode" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="text" id="sample6_address" name="user_addr" placeholder="주소"><br>
+<input type="text" id="sample6_detailAddress" name="user_addrdetail" placeholder="상세주소">
+<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 </div>
-
-
-<div class="roww">
-	<div>
-		<label class="lab">상세주소<em> * </em></label>
-	</div>
-	<div class="inputbox">
-	<input type="text" id="sample6_detailAddress" name="user_addrdetail" placeholder="상세주소를 입력해주세요.">
-	</div>
 </div>
-
-
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -370,68 +313,32 @@
 </script>
 			
 
-                        <!-- 하단 입력-->
-                        <div class="tabmanu">
-                            <div class="tabCell">
-                                <div class="tabBtnCell">
-                                    <input type="radio" id="btn1" name="mb_type" class="hidden" data-tab="content1"
-                                        checked>
-                                    <label for="btn1">트레이너</label>
-                                    <input type="radio" id="btn2" name="mb_type" class="hidden" data-tab="content2">
-                                    <label for="btn2">헬스장</label>
-                                </div>
+			<div class="col-sm-6 mb-5">
+				<input type="submit" class="btn btn-primary" value="헬스장">
+				<input type="reset" class="btn btn-danger" value="트레이너">
+			</div>	
 
-                                <div class="on" id="content1">
-                                    내용1
-                                </div>
-
-                                <div class="" id="content2">
-                                    내용2
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-			<div>
-				<div class="subbtn">
-					<input type="submit" class="btn btn-primary" value="등록" disabled id="dischk">
-					</div>
+			<div class="form-group row" align="center">
+			<div class="col-sm-6">
+				<input type="submit" class="btn btn-primary" value="등록" disabled id="dischk">
+				<input type="reset" class="btn btn-danger" value="취소">
+			</div>	
 			</div>	
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
 		</form>
-					</div></div>
-				</section>
-			</div>
-		</main>	
-		
-
- <footer id="footer">
-<%@include file="/html/pieceFooter.jsp" %>
-        </footer>
-
-        <!-- side butten -->
-        <article id="sideBtn">
-            <div class="sideLinkWrap">
-                <label id="" for="">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
-        </article>
 	</div>
+
+
+
+
+	<!-- JavaScript Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+
 
 </body>
 </html>

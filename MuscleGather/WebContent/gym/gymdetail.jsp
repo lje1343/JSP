@@ -7,9 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>업체 상세</title>
+<link type="text/css" rel="stylesheet" href="../css/default.css" />
+
+<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../js/default.js"></script>
 
     <script>
     // 이력서제출 팝업창
@@ -26,26 +30,47 @@
     	
     }
     </script>
+    
+    
+    <style>
+    textarea{
+	width: 100%;
+    resize: none;
+}
+    </style>
+    
+<body>
 
 	<%
 		// 선언문
 	String title = "구인 상세";
 	%>
-	<!-- CSS only -->
-	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-		crossorigin="anonymous">
+
+    <div class="wrap">
+        <!-- header-->
+        <header id="header">
+	
+        </header>
+
+        <!-- hidden nav-->
+        <nav id="nav"></nav>
+        
+        <main>
+    <div class="mainWrap">
+       <section class="sec1">
+            <!-- 컨탠츠 구역 -->
+       <div class="mainboard bd3" style="margin: auto;width:80%;">
+        
+	<div class="container" align="Center">
 
 
-	<div class="alert alert-secondary" role="alert">
-		<div class="container">
+		<div class="ct">
 			<h1 class="display-3">
 				<%=title%>
 			</h1>
 		</div>
-	</div>
+
+	<hr>
 	
 	<%
 
@@ -67,6 +92,38 @@
 	</div>
 	<div class = "col-ma-6">
 
+      	
+      	 <p>이력서제출횟수 : <%=resumecnt%></p>
+      	 <p>번호 : <%=gym.getGym_no()%></p>
+      	 <p>사업자 : <%=gym.getUser_name()%></p>
+      	 <p>업체명 : <%=gym.getGym_name() %></p>
+      	 <p>소개 : <%=gym.getGym_content()%></p>
+      	 <p>주소 : <%=gym.getGym_addr()%></p>
+      	 <p>등록날짜 : <%=gym.getGym_regdate()%></p>
+      	 <p>급여 : <%=gym.getGym_salary()%></p>
+      	 
+      	 <div class="form-group row">
+				<div class="col-sm-3">
+					<input type="text" name="gym_name" class="form-control" style="height:50px;" value=<%=gym.getGym_name() %>>
+				</div><br>
+
+			<div class="form-group row">
+				<label class="col-sm-2">지급 연봉</label>
+				<div class="col-sm-3">
+					<input type="text" name="gym_salary" class="form-control" style="height:50px;" value=<%=gym.getGym_salary()%>>
+				</div>
+
+			</div><br>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">업체 소개<em> * </em></label>
+				<div class="col-sm-3">
+				<textarea name="gym_content" class="form-control" style="height:350px;"><%=gym.getGym_content()%></textarea>
+				</div><br>
+				
+			</div>
+
+
 	<%
 	
 		if(gym.getGym_images() != null){
@@ -83,15 +140,9 @@
 	
 	<% 	}
 			} %>
-      	
-      	 <p>이력서제출횟수 : <%=resumecnt%></p>
-      	 <p>번호 : <%=gym.getGym_no()%></p>
-      	 <p>사업자 : <%=gym.getUser_name()%></p>
-      	 <p>업체명 : <%=gym.getGym_name() %></p>
-      	 <p>소개 : <%=gym.getGym_content()%></p>
-      	 <p>주소 : <%=gym.getGym_addr()%></p>
-      	 <p>등록날짜 : <%=gym.getGym_regdate()%></p>
-      	 <p>급여 : <%=gym.getGym_salary()%></p>
+			
+			</div>
+				
       	 
       	 <!-- to -> 받는사람(헬스장) from -> 보낸사람(트레이너) -->
       	 <input type='button' name="user_from_no" style='width:200px; height:50px;' value='이력서제출' onclick='resume(<%=trainer.getTrainer_no()%>,<%=gym.getGym_no()%>)'/>
@@ -151,13 +202,31 @@ geocoder.addressSearch(addr, function(result, status) {
 });    
 </script>
 
+	</div>
+	
+	</div>
+	
+	 </section>
 
+            </div>
+        </main>
+        
+ <footer id="footer">
 
-	<!-- JavaScript Bundle with Popper -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
+        </footer>
+
+        <!-- side butten -->
+        <article id="sideBtn">
+            <div class="sideLinkWrap">
+                <label id="" for="">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+        </article>
+    </div>
 		
 </body>
 </html>

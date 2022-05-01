@@ -23,7 +23,7 @@
         .tabmanu {
             margin: auto;
             width: 100%;
-            height: 450px;
+            height: 1000px;
             border: 1px solid #666666;
         }
 
@@ -61,6 +61,29 @@
             background: #ffffff;
             color: #666666;
         }
+        
+        form label em {
+		font-size : 15px;
+		color: red;
+		font-weight: 800;
+		}
+	
+		.ct{
+			height: 80px;
+			text-align: start;
+			margin-top:80px;
+		}
+		textarea{
+			width: 100%;
+		    resize: none;
+		}
+		
+		#addressbtn{
+			width:100%;
+			height:100%;
+			margin: 0px 0px 0px 10px;
+		}
+
     </style>
     <script>
         $(document).ready(function () {
@@ -381,12 +404,234 @@
                                     <label for="btn2">헬스장</label>
                                 </div>
 
+								
                                 <div class="on" id="content1">
-                                    내용1
-                                </div>
+								<!-- trainerwrite.jsp -->
+			<form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
 
+			<div class="form-group row">
+				<label class="col-sm-2">제목<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="text" name="trainer_title" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
+				</div><br>
+
+			<div class="form-group row">
+				<label class="col-sm-2">소개란<em> * </em></label>
+				<div class="col-sm-3">
+				<textarea name="trainer_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
+				</div><br>
+				
+			</div>
+
+			</div>
+
+
+			
+			<div class="form-group row">
+			  <label class="col-sm-2" for="formFileSm">트레이너사진</label>
+			  <div class="col-sm-3" style="border:1px solid #666666;">
+			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple style="height:50px;">
+			</div>
+			</div>	
+			<br><br>
+						
+<!-- 주소api  -->
+<div class="form-group row">
+<div style="display:flex;">
+<div class="col-sm-3" style="text-align:left;">
+<input type="text" id="sample5_address" name="trainer_addr" placeholder="주소를 검색해주세요." style="height:50px;width:950px;"><br>
+</div>
+&nbsp;&nbsp;&nbsp;<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
+</div>
+</div>
+<br><br>
+<div id="map" style="width:950px;height:500px;margin:20px;display:none"></div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312d59fcbad6db485ff22cd2fef8f678&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                        
+                        // 추가
+                        gym_latitude = result.y;
+                        gym_longtitude = result.x;
+                    }
+                });
+            }
+        }).open();
+    }
+    
+    
+</script>
+
+ 
+
+			<div class="form-group row" style="width:100%; display:flex; justify-content:flex-end;" align="center">
+					<div style="width:125px;">
+					<input type="submit" class="btn btn-primary" value="등록">
+					</div>
+					<div style="width:125px; margin-left:20px;">
+					<input type="reset" class="btn btn-primary" value="초기화">
+					</div>
+			</div>	
+			
+		</form>
                                 <div class="" id="content2">
-                                    내용2
+              	<!-- gymwrite.jsp -->
+                <form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
+                <div class="form-group row">
+				<label class="col-sm-2">업체명<em> * </em></label>
+				<div class="col-sm-3">
+					<input type="text" name="gym_name" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
+				</div><br>
+
+			<div class="form-group row">
+				<label class="col-sm-2">업체 소개<em> * </em></label>
+				<div class="col-sm-3">
+				<textarea name="gym_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
+				</div><br>
+				
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">지급 연봉</label>
+				<div class="col-sm-3">
+					<input type="text" name="gym_salary" class="form-control" style="height:50px;" placeholder="지급 연봉을 작성해주세요.">
+				</div>
+
+			</div><br>
+
+
+			</div>
+
+
+			
+			<div class="form-group row">
+			  <label class="col-sm-2" for="formFileSm">업체사진</label>
+			  <div class="col-sm-3" style="border:1px solid #666666;">
+			  <input name = "images" class="form-control form-control-sm" id="formFileSm" type="file" multiple style="height:50px;">
+			</div>
+			</div>	
+			<br><br>
+						
+<!-- 주소api  -->
+<div class="form-group row">
+<div style="display:flex;">
+<div class="col-sm-3" style="text-align:left;">
+<input type="text" id="sample5_address" name="gym_addr" placeholder="업체주소를 검색해주세요." style="height:50px;width:950px;"><br>
+</div>
+<div>
+<input type="button" id="addressbtn" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
+</div>
+</div>
+</div>
+<br><br>
+<div id="map" style="width:950px;height:500px;margin:20px;display:none"></div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312d59fcbad6db485ff22cd2fef8f678&libraries=services"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+            level: 5 // 지도의 확대 레벨
+        };
+
+    //지도를 미리 생성
+    var map = new daum.maps.Map(mapContainer, mapOption);
+    //주소-좌표 변환 객체를 생성
+    var geocoder = new daum.maps.services.Geocoder();
+    //마커를 미리 생성
+    var marker = new daum.maps.Marker({
+        position: new daum.maps.LatLng(37.537187, 127.005476),
+        map: map
+    });
+
+
+    function sample5_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = data.address; // 최종 주소 변수
+
+                // 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("sample5_address").value = addr;
+                // 주소로 상세 정보를 검색
+                geocoder.addressSearch(data.address, function(results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        // 해당 주소에 대한 좌표를 받아서
+                        var coords = new daum.maps.LatLng(result.y, result.x);
+                        // 지도를 보여준다.
+                        mapContainer.style.display = "block";
+                        map.relayout();
+                        // 지도 중심을 변경한다.
+                        map.setCenter(coords);
+                        // 마커를 결과값으로 받은 위치로 옮긴다.
+                        marker.setPosition(coords)
+                        
+                        // 추가
+                        gym_latitude = result.y;
+                        gym_longtitude = result.x;
+                    }
+                });
+            }
+        }).open();
+    }
+    
+    
+</script>
+
+ 
+
+			<div class="form-group row" style="width:100%; display:flex; justify-content:flex-end;" align="center">
+					<div style="width:125px;">
+					<input type="submit" class="btn btn-primary" value="등록">
+					</div>
+					<div style="width:125px; margin-left:20px;">
+					<input type="reset" class="btn btn-primary" value="초기화">
+					</div>
+			</div>	
+			</form>
+                                </div> <!-- content2 끝 -->
                                 </div>
 
                             </div>
