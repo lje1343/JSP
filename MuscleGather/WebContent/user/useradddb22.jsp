@@ -6,9 +6,17 @@
 <%@ page import = "org.apache.commons.fileupload.disk.*" %>
 <%@ page import = "org.apache.commons.fileupload.servlet.*" %>
 <%@ page import = "util.FileUtil"%>
+
+
+
  <%
  request.setCharacterEncoding("UTF-8");
  
+/*  String flag = request.getParameter("flag"); */
+/*  String flag = request.getParameter("sep_btn"); */
+ 
+ 
+ String flag = null;
  String user_name = null;
  String user_pw = null;
  String user_birth = null;
@@ -62,6 +70,7 @@
          else if (name.equals("gym_content")) gym_content = value;
          else if (name.equals("gym_salary")) gym_salary = value;
          else if (name.equals("gym_addr")) gym_addr = value;
+         else if (name.equals("sep_btn")) flag = value;
      }else {
 	        
 	        try{
@@ -92,8 +101,9 @@
 	             
 	    }
 }
+System.out.println(flag); 
+System.out.println(gym_name); 
 
-System.out.println(trainer_title.isEmpty());
  
 UserDAO user = new UserDAO();
 int result = user.insert(user_name, user_pw, user_birth, user_zipcode, user_addr, user_addrdetail, 
@@ -103,24 +113,22 @@ String user_no = user.getUserNo(user_email);
 //user 끝지점
  
  
-if(trainer_title != null){
+if(flag.equals("1")){
 
 	 //디비에 게시물 모든 정보 전달
 	 TrainerDAO dao = new TrainerDAO();
-	 int flag = 1;
+	 int flag11 = 1;
 	 if(chk == 1){ 
-	    flag = dao.trainerInsert(user_no, trainer_title, trainer_content, trainer_addr, arr);
+	    flag11 = dao.trainerInsert(user_no, trainer_title, trainer_content, trainer_addr, arr);
 	 } else {
-	    flag = dao.trainerInsert(user_no, trainer_title, trainer_content, trainer_addr);
+	    flag11 = dao.trainerInsert(user_no, trainer_title, trainer_content, trainer_addr);
 	 }
 	  
 // trainer 끝점
 
 	result = 2;
 
-}  
-
-if(gym_name != null) {
+}  else if(flag.equals("0")) {
 	 //디비에 게시물 모든 정보 전달
 	 GymDAO dao = new GymDAO();
 	 boolean b = true;

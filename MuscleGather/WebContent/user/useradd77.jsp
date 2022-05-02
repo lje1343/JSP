@@ -247,13 +247,18 @@ textarea {
    			
    		}
    		
+   		// form (업체/트레이너 0 1)
    		function btnchk(){
-   			var flag = flag;
    			
-
-
+   			flag = document.getElementByName("sep_btn").value;
+   			
+   			window.open('chattingroom.jsp?chatId=" + user_email + "' ,'채팅방', 'width=500, height=450');
+   			
+   			document.frm.action = "useradd22.jsp?flag=" + flag;
+   		    document.frm.method = "post";
+   		    document.frm.submit();
    		}
-   		
+
    			
     </script>
 
@@ -276,7 +281,7 @@ textarea {
 					<!-- 컨탠츠 구역 -->
 					<div class="mainboard bd3" style="margin: auto; width: 80%;">
 
-					<form action="useradddb22.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm">
+					<!-- <form action="useradddb22.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm"> -->
 
 						<div class="container" align="Center">
 
@@ -436,9 +441,9 @@ textarea {
 									<div class="tabmanu">
 										<div class="tabCell">
 											<div class="tabBtnCell">
-												<input type="radio" id="btn1" name="sep_btn" value="1" class="hidden"
+												<input type="radio" id="btn1" value=1 name="sep_btn" class="hidden"
 													data-tab="content1" checked> <label for="btn1">트레이너</label>
-												<input type="radio" id="btn2" name="sep_btn" value="0" class="hidden"
+												<input type="radio" id="btn2" value=0 name="sep_btn" class="hidden"
 													data-tab="content2"> <label for="btn2">헬스장</label>
 											</div>
 
@@ -543,12 +548,11 @@ textarea {
 
 							<div class="usersubbtn">
 								<div class="subbtn">
-									<input type="submit" class="btn btn-primary" value="등록"
-										id="dischk">
+									<input type="button" onclick="btnchk()" class="btn btn-primary" value="등록" id="dischk">
 								</div>
 							</div>
 
-							</form>
+							<!-- </form> -->
 						</div>
 				</section>
 			</div>
