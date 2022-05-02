@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
@@ -12,9 +13,6 @@ import jdbc.UserDTO;
 import util.ConnectionPool;
 
 public class UserDAO {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	
 	public UserDTO getUser(String user_no) 
@@ -77,6 +75,39 @@ public class UserDAO {
          }
 	
 	
+	/* email로 user_no 받아오는 메서드(useradd.jsp) */
+	public String getUserNo(String user_email) 
+			throws NamingException, SQLException{
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			String sql = "SELECT user_no FROM user WHERE user_email = ?";
+			
+			conn = ConnectionPool.get();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_email);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			String user_no = rs.getString("user_no");
+			
+			
+			return user_no;
+			
+		}finally {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+		
+	}
+	
+	
 	
 	// useradd.jsp
 	/* user_no, user_admin, user_kakao, user_auth, user_status */
@@ -137,7 +168,27 @@ public class UserDAO {
 	
 		return cnt;
 	}
-
 	
+	/*
+	public int userinsert(String user_name, String user_pw, String user_birth, String user_zipcode, 
+			String user_addr, String user_addrdetail, String user_gender, String user_email, String user_phone,
+			String trainer_title, String trainer_content, String trainer_addr, ArrayList<String> arr2)
+	throws NamingException, SQLException {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = null;
+		
+		if()
+	}
+	
+	public int userinsert(String user_name, String user_pw, String user_birth, String user_zipcode, 
+			String user_addr, String user_addrdetail, String user_gender, String user_email, String user_phone,
+			String gym_name, String gym_content, String gym_addr, String gym_salary, ArrayList<String> arr)
+	throws NamingException, SQLException{
+		
+	}
+	*/
 	
 }

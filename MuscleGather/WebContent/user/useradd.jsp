@@ -286,7 +286,7 @@
 
 <!-- 우편번호/주소/상세주소 api -->
 
-<div class="roww">
+<!-- <div class="roww">
 	<div>
 		<label class="lab">우편번호<em> * </em></label>
 	</div>
@@ -314,6 +314,15 @@
 	<div class="inputbox">
 	<input type="text" id="sample6_detailAddress" name="user_addrdetail" placeholder="상세주소를 입력해주세요.">
 	</div>
+</div> -->
+
+<!-- 우편번호/주소/상세주소 api -->
+<input type="text" id="sample6_postcode" name="user_zipcode" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+<input type="text" id="sample6_address" name="user_addr" placeholder="주소"><br>
+<input type="text" id="sample6_detailAddress" name="user_addrdetail" placeholder="상세주소">
+<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+</div>
 </div>
 
 
@@ -370,7 +379,7 @@
 </script>
 			
 
-                        <!-- 하단 입력-->
+<!--                         하단 입력
                         <div class="tabmanu">
                             <div class="tabCell">
                                 <div class="tabBtnCell">
@@ -391,23 +400,16 @@
 
                             </div>
 
-                        </div>
+                        </div> -->
 
 
 			<div>
 				<div class="subbtn">
-					<input type="submit" class="btn btn-primary" value="등록" disabled id="dischk">
+					<input type="submit" class="btn btn-primary" value="등록" id="dischk">
 					</div>
 			</div>	
 			
-			
-			
-			
-			
-			
-			
-			
-			
+				
 			
 		</form>
 					</div></div>

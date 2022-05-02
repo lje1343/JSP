@@ -10,11 +10,7 @@
 <%
 request.setCharacterEncoding("utf-8");
 // images 로 전체 데이터가 넘어옴
-String gym_name = null;
-String gym_content = null;
-String gym_salary = null;
-String gym_addr = null; 
-String gym_images = null;
+
 int chk = 1;	// 사진없는경우
 
 byte[] pfile = null;
@@ -73,25 +69,19 @@ while(iter.hasNext()) {  // 요소가 있으면 계속 반복 없으면 종료
 }
 
 
-
-/* System.out.println("while 후---------------");
-System.out.println(gym_name);
-System.out.println(gym_content);
-System.out.println(gym_addr);
-System.out.println(gym_salary);
-System.out.println(gym_images); */
-
 //디비에 게시물 모든 정보 전달
 GymDAO dao = new GymDAO();
 boolean b = true;
 
 if(chk == 1){ 
-	b = dao.insert(gym_name, gym_content, gym_addr, gym_salary, arr);
+	b = dao.insert(user_no, gym_name, gym_content, gym_addr, gym_salary, arr);
 } else {
-	b = dao.insert(gym_name, gym_content, gym_addr, gym_salary);
+	b = dao.insert(user_no, gym_name, gym_content, gym_addr, gym_salary);
 }
 	
 if(b){
 	response.sendRedirect("gymlist.jsp");
 }
 %>
+
+

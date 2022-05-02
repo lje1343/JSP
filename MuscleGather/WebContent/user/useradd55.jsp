@@ -23,7 +23,7 @@
         .tabmanu {
             margin: auto;
             width: 100%;
-            height: 1000px;
+            height: 900px;
             border: 1px solid #666666;
         }
 
@@ -83,8 +83,19 @@
 			height:100%;
 			margin: 0px 0px 0px 10px;
 		}
+		
+		.usersubbtn{
+			margin-top:50px;
+		}
+		
+		#dischk{
+			height:50px;
+		}
 
     </style>
+        
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        
     <script>
         $(document).ready(function () {
             //tab manu 컨트롤
@@ -94,6 +105,55 @@
                 $('#' + tab_id).addClass('on');
             })
         })
+        
+        
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    }
 
     </script>
 
@@ -219,7 +279,8 @@
 	<hr>
 	
 
-		<form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm">
+<!-- 		<form action="useradddb.jsp" method="post" name="signUpForm" enctype="multipart/form-data" accept-charset="UTF-8" class="frm"> -->
+		<form class="frm">
 			
 			
 				<div class="roww">
@@ -314,7 +375,7 @@
 		<label class="lab">우편번호<em> * </em></label>
 	</div>
 	<div class="inputbox">
-	<input type="text" id="zipbox" name="user_zipcode" placeholder="우편번호를 입력해주세요.">
+	<input type="text" id="sample6_postcode" name="user_zipcode" placeholder="우편번호를 입력해주세요."> 
 	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색">
 	</div>
 </div>				
@@ -339,59 +400,16 @@
 	</div>
 </div>
 
-
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
-</script>
-			
+<div class="roww">
+	<div>
+		<label class="lab">참고항목<em> * </em></label>
+	</div>
+	<div class="inputbox">
+	<input type="text" id="sample6_extraAddress" placeholder="참고항목을 입력해주세요.">
+	</div>
+</div>
+		</form>	<!-- useradd 끝 -->
+		
 
                         <!-- 하단 입력-->
                         <div class="tabmanu">
@@ -407,18 +425,18 @@
 								
                                 <div class="on" id="content1">
 								<!-- trainerwrite.jsp -->
-			<form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
+			<form action="../trainer/trainerwritedb.jsp" method="post" enctype="multipart/form-data">
 
 			<div class="form-group row">
-				<label class="col-sm-2">제목<em> * </em></label>
+				<label class="col-sm-2">이력서명<em> * </em></label>
 				<div class="col-sm-3">
-					<input type="text" name="trainer_title" class="form-control" style="height:50px;" placeholder="업체명을 작성해주세요.">
+					<input type="text" name="trainer_title" class="form-control" style="height:50px;" placeholder="이력서 제목을 작성해주세요.">
 				</div><br>
 
 			<div class="form-group row">
 				<label class="col-sm-2">소개란<em> * </em></label>
 				<div class="col-sm-3">
-				<textarea name="trainer_content" class="form-control" style="height:350px;" placeholder="업체 소개를 작성해주세요."></textarea>
+				<textarea name="trainer_content" class="form-control" style="height:350px;" placeholder="이력서 내용을 작성해주세요."></textarea>
 				</div><br>
 				
 			</div>
@@ -434,73 +452,9 @@
 			</div>
 			</div>	
 			<br><br>
-						
-<!-- 주소api  -->
-<div class="form-group row">
-<div style="display:flex;">
-<div class="col-sm-3" style="text-align:left;">
-<input type="text" id="sample5_address" name="trainer_addr" placeholder="주소를 검색해주세요." style="height:50px;width:950px;"><br>
-</div>
-&nbsp;&nbsp;&nbsp;<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
-</div>
-</div>
-<br><br>
-<div id="map" style="width:950px;height:500px;margin:20px;display:none"></div>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312d59fcbad6db485ff22cd2fef8f678&libraries=services"></script>
-<script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
-
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                        
-                        // 추가
-                        gym_latitude = result.y;
-                        gym_longtitude = result.x;
-                    }
-                });
-            }
-        }).open();
-    }
-    
-    
-</script>
+			
+		<!-- 지도api -->
+		<%@include file="trainerapi.jsp" %>					
 
  
 
@@ -513,10 +467,11 @@
 					</div>
 			</div>	
 			
-		</form>
+		</form> <!-- trainer 끝 -->
+		</div> <!-- content1 끝 -->
                                 <div class="" id="content2">
               	<!-- gymwrite.jsp -->
-                <form action="gymwritedb.jsp" method="post" enctype="multipart/form-data">
+                <form action="../gym/gymwritedb.jsp" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
 				<label class="col-sm-2">업체명<em> * </em></label>
 				<div class="col-sm-3">
@@ -550,76 +505,9 @@
 			</div>
 			</div>	
 			<br><br>
-						
-<!-- 주소api  -->
-<div class="form-group row">
-<div style="display:flex;">
-<div class="col-sm-3" style="text-align:left;">
-<input type="text" id="sample5_address" name="gym_addr" placeholder="업체주소를 검색해주세요." style="height:50px;width:950px;"><br>
-</div>
-<div>
-<input type="button" id="addressbtn" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control"><br><br>
-</div>
-</div>
-</div>
-<br><br>
-<div id="map" style="width:950px;height:500px;margin:20px;display:none"></div>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312d59fcbad6db485ff22cd2fef8f678&libraries=services"></script>
-<script>
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
-
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                        
-                        // 추가
-                        gym_latitude = result.y;
-                        gym_longtitude = result.x;
-                    }
-                });
-            }
-        }).open();
-    }
-    
-    
-</script>
-
+			
+		<!-- 지도api -->
+		<%@include file="gymapi.jsp" %>					
  
 
 			<div class="form-group row" style="width:100%; display:flex; justify-content:flex-end;" align="center">
@@ -630,7 +518,7 @@
 					<input type="reset" class="btn btn-primary" value="초기화">
 					</div>
 			</div>	
-			</form>
+			</form> <!-- gym 끝 -->
                                 </div> <!-- content2 끝 -->
                                 </div>
 
@@ -639,22 +527,12 @@
                         </div>
 
 
-			<div>
+			<div class="usersubbtn">
 				<div class="subbtn">
-					<input type="submit" class="btn btn-primary" value="등록" disabled id="dischk">
+					<input type="button" onclick="location.href='useradddb.jsp'" class="btn btn-primary" value="등록" disabled id="dischk">
 					</div>
 			</div>	
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		</form>
+
 					</div></div>
 				</section>
 			</div>

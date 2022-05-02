@@ -60,7 +60,7 @@
   	</div>
 
       <% } %>
-        	 <a href="gymwrite.jsp" class="btn btn-secondary">업체등록</a>
+        	 <a href="../user/useradd55.jsp" class="btn btn-secondary">업체등록</a>
 
       </div>
       <hr>

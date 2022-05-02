@@ -118,40 +118,12 @@ public class GymDAO {
 	
 	
 	/* String gym_no, String user_no, String gym_secret, String gym_regdate, */
-	
-	// gymwrite.jsp (IMAGES -> O)
-	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary, String gym_images)
-	throws NamingException, SQLException {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,?)";
-			conn = ConnectionPool.get();
-			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, 8);
-				pstmt.setString(2, gym_name);
-				pstmt.setString(3, gym_content);
-				pstmt.setString(4, gym_addr);
-				pstmt.setString(5, gym_salary);
-				pstmt.setInt(6, 0);
-				pstmt.setString(7, LocalDateTime.now().toString());
-				pstmt.setString(8, gym_images);
-			int result = pstmt.executeUpdate();
-			
-			return (result==1) ? true : false;			
-			
-		} finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		}
-	}
+
 
 	// gymwrite.jsp (IMAGES -> X)
-	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary)
+	public boolean insert(String user_no, String gym_name, String gym_content, String gym_addr, String gym_salary)
 			throws NamingException, SQLException {
-		
+		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -159,7 +131,7 @@ public class GymDAO {
 			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,NULL)";
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 2);
+			pstmt.setString(1, user_no);
 			pstmt.setString(2, gym_name);
 			pstmt.setString(3, gym_content);
 			pstmt.setString(4, gym_addr);
@@ -177,7 +149,7 @@ public class GymDAO {
 	}
 	
 	// gymwrite.jsp (IMAGES -> O)
-	public boolean insert(String gym_name, String gym_content, String gym_addr, String gym_salary, ArrayList<String> arr)
+	public boolean insert(String user_no, String gym_name, String gym_content, String gym_addr, String gym_salary, ArrayList<String> arr)
 	throws NamingException, SQLException {
 		
 		Connection conn = null;
@@ -194,7 +166,7 @@ public class GymDAO {
 			String sql = "INSERT INTO gym VALUES (NULL,?,?,?,?,?,?,?,?)";
 			conn = ConnectionPool.get();
 			pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, 8);
+				pstmt.setString(1, user_no);
 				pstmt.setString(2, gym_name);
 				pstmt.setString(3, gym_content);
 				pstmt.setString(4, gym_addr);
