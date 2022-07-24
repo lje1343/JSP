@@ -1,4 +1,4 @@
-# 📝 JSP
+# 📝 Java_Advanced
 <br>
 <b>Day01</b>  <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✔️ MVC Model1 기본적인 학습 / 환경 설정 <br>
